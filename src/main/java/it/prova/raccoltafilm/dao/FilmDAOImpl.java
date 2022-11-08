@@ -39,7 +39,7 @@ public class FilmDAOImpl implements FilmDAO {
 		if (filmInstance == null) {
 			throw new Exception("Problema valore in input");
 		}
-		entityManager.merge(filmInstance);
+		filmInstance=entityManager.merge(filmInstance);
 
 
 	}

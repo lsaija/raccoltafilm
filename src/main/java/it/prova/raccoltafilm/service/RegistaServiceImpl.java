@@ -135,10 +135,11 @@ public class RegistaServiceImpl implements RegistaService {
 			entityManager.getTransaction().begin();
 
 			registaDAO.setEntityManager(entityManager);
-			Regista registaToRemove = registaDAO.findOne(idRegistaToRemove).orElse(null);
+			Regista registaToRemove = registaDAO.findOneEager(idRegistaToRemove).orElse(null);
 			if (idRegistaToRemove == null)
 				throw new ElementNotFoundException("Film con id: " + idRegistaToRemove + " non trovato.");
 
+			//aggiungere eccezione
 			registaDAO.delete(registaToRemove);
 			entityManager.getTransaction().commit();
 		} catch (Exception e) {
