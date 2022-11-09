@@ -41,6 +41,7 @@ public class ExecuteDeleteRegistaServelet extends HttpServlet {
 			
 		} catch (RegistaConFilmException e) {
 			request.getRequestDispatcher("ExecuteListRegistaServlet?operationResult=NO_FIGLI").forward(request, response);
+			request.setAttribute("errorMessage", "Attenzione si è verificato un provaerrore.");
 			return;
 			
 		} catch (Exception e) {
