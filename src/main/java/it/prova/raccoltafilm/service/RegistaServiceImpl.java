@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 
 import it.prova.raccoltafilm.dao.RegistaDAO;
 import it.prova.raccoltafilm.exceptions.ElementNotFoundException;
+import it.prova.raccoltafilm.exceptions.RegistaConFilmException;
 import it.prova.raccoltafilm.model.Film;
 import it.prova.raccoltafilm.model.Regista;
 import it.prova.raccoltafilm.web.listener.LocalEntityManagerFactoryListener;
@@ -139,7 +140,10 @@ public class RegistaServiceImpl implements RegistaService {
 			if (idRegistaToRemove == null)
 				throw new ElementNotFoundException("Film con id: " + idRegistaToRemove + " non trovato.");
 
-			//aggiungere eccezione
+			if (registaToRemove.getFilms().size() > 0)
+				throw new RegistaConFilmException("Regista con id: " + idRegistaToRemove + " ha ancora dei film collegati.");
+				
+				//throw new RegistaAlmenoUnFilmException("Regista con id: " + idRegista + " ha ancora dei film collegati.");
 			registaDAO.delete(registaToRemove);
 			entityManager.getTransaction().commit();
 		} catch (Exception e) {

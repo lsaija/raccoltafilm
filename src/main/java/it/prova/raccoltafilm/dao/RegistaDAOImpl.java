@@ -62,7 +62,7 @@ public class RegistaDAOImpl implements RegistaDAO {
 
 	@Override
 	public Optional<Regista> findOneEager(Long id) throws Exception {
-		return entityManager.createQuery("from Regista f left join fetch f.film where f.id=:idRegista", Regista.class)
+		return entityManager.createQuery("from Regista r left join fetch r.films where r.id=:idRegista", Regista.class)
 				.setParameter("idRegista", id).getResultList().stream().findFirst();
 
 	}
